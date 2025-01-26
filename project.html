@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Mate</title>
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #40e0d0; /* Turquoise theme */
+      color: #fff;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    /* Creative Title Styles */
+    h1 {
+      font-family: 'Lobster', cursive;
+      font-size: 4rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #ffffff;
+      letter-spacing: 2px;
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    /* Glowing Effect for the Title */
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(64, 224, 208, 0.8);
+      }
+      100% {
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 50px rgba(64, 224, 208, 1);
+      }
+    }
+
+    /* Animated Background Effect */
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #40e0d0, #ff7f50, #ff6347);
+      background-size: 400% 400%;
+      animation: gradientBackground 10s ease infinite;
+      z-index: -1;
+    }
+
+    /* Background Animation */
+    @keyframes gradientBackground {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Content Box Styles */
+    .content {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      width: 60%;
+      max-width: 600px;
+      margin-top: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .content:hover {
+      transform: scale(1.05);
+    }
+
+    .button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      background-color: #ff6347;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #ff7f50;
+    }
+
+    /* New Home Page Layout */
+    .home-page {
+      display: flex;
+      justify-content: space-around;
+      width: 80%;
+      margin-top: 50px;
+    }
+
+    /* Box Styles */
+    .box {
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      padding: 20px;
+      width: 45%;
+      transition: transform 0.3s ease;
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .box h2 {
+      font-family: 'Lobster', cursive;
+      font-size: 2rem;
+      color: #005f5f;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .box p {
+      font-size: 1rem;
+      color: #ffffff;
+    }
+
+    /* Task Page Styles */
+    .task-page {
+      display: none;
+      position: relative;
+      width: 80%;
+      max-width: 600px;
+      height: 70vh;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      margin-top: 50px;
+      padding: 20px;
+    }
+
+    .task-dialogue {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+    }
+
+    .task-container {
+      margin-top: 50px;
+      padding: 20px;
+      border-radius: 10px;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    /* Task Bubble Styles */
+    .task-bubble {
+      display: inline-block;
+      background-color: #ffffff; /* White background */
+      color: #000; /* Black text color for contrast */
+      padding: 10px 20px;
+      border-radius: 20px;
+      margin: 10px;
+      font-size: 1.2rem;
+      position: relative;
+      width: calc(100% - 50px); /* Ensure room for icons */
+      text-align: left; /* Align task name left */
+    }
+
+    .task-bubble .icons {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .task-bubble .icons span {
+      cursor: pointer;
+    }
+
+    .task-bubble .icons span:hover {
+      color: #ff7f50;
+    }
+
+    .plus-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: none;
+      border-radius: 50%;
+      padding: 15px;
+      cursor: pointer;
+      font-size: 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    .plus-btn:hover {
+      background-color: #ff7f50;
+    }
+
+    /* Modal/Form Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      width: 400px;
+      text-align: center;
+    }
+
+    .modal-content input {
+      width: 80%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .modal-content button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ff6347;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background-color: #ff7f50;
+    }
+
+    /* Edit Task Modal Styles */
+    .edit-modal-content {
+      width: 400px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .edit-modal-content input {
+      width: 80%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .edit-modal-content button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ff6347;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .edit-modal-content button:hover {
+      background-color: #ff7f50;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  <h1>Focus Mate</h1>
+  <div class="content">
+    <p>Welcome to Focus Mate, your ultimate companion for concentration and productivity. Stay focused, achieve your goals, and conquer the day!</p>
+    <button class="button" onclick="showHomePage()">Start Now</button>
+  </div>
+
+  <div class="home-page" id="homePage" style="display: none;">
+    <div class="box" onclick="showTaskPage()">
+      <h2>My Tasks</h2>
+      <p>Track your tasks and stay organized. Complete them one by one and check them off as you go!</p>
+    </div>
+    <div class="box">
+      <h2>Exercises</h2>
+      <p>Stay active with exercises that help keep your mind and body in peak condition for productivity.</p>
+    </div>
+  </div>
+
+  <!-- Task Page -->
+  <div class="task-page" id="taskPage">
+    <div class="task-dialogue">Click the + sign to add your task</div>
+    <div class="task-container" id="taskContainer"></div>
+    <button class="plus-btn" onclick="openModal()">+</button>
+  </div>
+
+  <!-- Modal Form for Adding Task -->
+  <div class="modal" id="taskModal">
+    <div class="modal-content">
+      <h2>Add New Task</h2>
+      <input type="text" id="taskNameInput" placeholder="Enter task name">
+      <button onclick="addTaskFromModal()">Add Task</button>
+    </div>
+  </div>
+
+  <!-- Edit Task Modal Form -->
+  <div class="modal" id="editTaskModal">
+    <div class="edit-modal-content">
+      <h2>Edit Task</h2>
+      <input type="text" id="editTaskInput" placeholder="Edit task name">
+      <button onclick="saveTaskEdit()">Save Changes</button>
+    </div>
+  </div>
+
+  <script>
+    let currentTaskBubble;
+
+    function showHomePage() {
+      document.querySelector('.content').style.display = 'none';
+      document.getElementById('homePage').style.display = 'flex';
+    }
+
+    function showTaskPage() {
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('taskPage').style.display = 'block';
+    }
+
+    function openModal() {
+      document.getElementById('taskModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('taskModal').style.display = 'none';
+    }
+
+    function addTaskFromModal() {
+      const taskName = document.getElementById('taskNameInput').value;
+      if (taskName) {
+        const taskContainer = document.getElementById('taskContainer');
+        const taskBubble = document.createElement('div');
+        taskBubble.classList.add('task-bubble');
+        taskBubble.innerHTML = `${taskName}
+          <div class="icons">
+            <span onclick="editTask(this)">✏</span>
+            <span onclick="deleteTask(this)">❌</span>
+          </div>`;
+        taskContainer.appendChild(taskBubble);
+        closeModal();
+      }
+    }
+
+    function editTask(icon) {
+      currentTaskBubble = icon.parentElement.parentElement;
+      const taskName = currentTaskBubble.firstChild.nodeValue.trim();
+      document.getElementById('editTaskInput').value = taskName;
+      document.getElementById('editTaskModal').style.display = 'flex';
+    }
+
+    function saveTaskEdit() {
+      const newTaskName = document.getElementById('editTaskInput').value;
+      if (newTaskName) {
+        currentTaskBubble.firstChild.nodeValue = newTaskName;
+        closeEditModal();
+      }
+    }
+
+    function closeEditModal() {
+      document.getElementById('editTaskModal').style.display = 'none';
+    }
+
+    function deleteTask(icon) {
+      icon.parentElement.parentElement.remove();
+    }
+  </script>
+</body>
+</html>
