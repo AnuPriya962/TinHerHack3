@@ -3,7 +3,7 @@
 
 Focus Mate is a productivity web application designed to help people with ADHD  stay focused and organized by allowing them to manage tasks effectively. With a visually engaging design and interactive features, Focus Mate serves as a simple yet powerful tool to enhance your productivity and improve your concentration.
 
-##**Why this idea?**
+**##Why this idea?**
 
 we came to this idea after a lot of contemplation about simple other projects.Initially we were not having any ideas. But then one of our friends happen to call 
 us. He has ADHD,and it suddenly striked us that why not focus on such an idea.More often than not people with ADHD or other mental illness struggle with not being able to talk about their issues with focusing and productivity. So we wanted to do something that can even be remotely of help to them.
@@ -66,6 +66,11 @@ focus-mate/
 ├── scripts.js         # Inline JavaScript (can be modularized)
 └── README.md          # Documentation (this file)
 ```
+
+**##Challenges we faced**
+1. The main problem was that we came to this hackathon without an idea ,so we spend around 5 hours atleast just thinking about ideas
+2. Inadequate coding knowledge. Me and my team mates do not have enough coding knowledge to make this project completely by ourselves yet.
+3. We couldn't do the timer part of the project eventhough we tried a lot due to which we couldn't advance with the project anymore on the hackathon.
 
 ## Future Enhancements
 - **Persistent Storage:** Save tasks using local storage or integrate with a backend.
